@@ -1,6 +1,12 @@
 // Required files
+// Twitter Keys
 var keysJS = require("./keys.js");
+// Spotify Package
 var Spotify = require('node-spotify-api');
+// Twitter Package
+var Twitter = require('twitter');
+// Request Package (OMDB)
+var request = require('request');
 
 // Gets twitterKeys from keys.js
 var keyList = keysJS.twitterKeys;
@@ -11,25 +17,25 @@ var consumerSecret = keysJS.twitterKeys.consumer_secret;
 var accessTokenKey = keysJS.twitterKeys.access_token_key;
 var accessTokenSecret = keysJS.twitterKeys.access_token_secret;
 
-// comands = ["my-tweets","spotify-this-song",
+// comand = ["my-tweets","spotify-this-song",
 // "movie-this","do-what-it-says"]
 var command = process.argv[2];
-var songName = process.argv[3];
+var MovieOrSong = process.argv[3];
 
-if (command === 'my-tweets'){
-  //grab tweets
+if (command === "my-tweets"){
+  console.log("grabbing tweets");
 }
 else if (command === "spotify-this-song"){
+  console.log("searching spotify");
   var spotify = new Spotify({
     id: '6a4fc3cb81474ef79373b922ff0a8576',
     secret: 'efcdea0ad29c4173a6dd0a21027050c3'
    });
    //receiving an error message, not sure why
    spotify
-   .search ({ type: 'track/album/artist', query: 'My search query'})
+   .search ({ type: "track", query: "My search query"})
    .then(function(response) {
-     console.log("SPOTIFY THIS SONG");
-     console.log(response);
+    console.log(response);
    })
    .catch(function(err) {
      console.log(err);
@@ -48,5 +54,3 @@ else if (command === "do-what-it-says"){
 // node liri.js spotify-this-song <song name>
 // spotify-this-song will show artist, song's name, preview link (spotify), album
 // if no song is provided, play "The Sign" by Ace of Base 
-
-
