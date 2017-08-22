@@ -24,6 +24,12 @@ var MovieOrSong = process.argv[3];
 
 if (command === "my-tweets"){
   console.log("grabbing tweets");
+  var params = {screen_name: 'GoldenAquila'};
+  client.get('statuses/user_timeline', params, function(error, tweets, response) {
+    if (!error) {
+     console.log(tweets);
+    }
+  });
 }
 else if (command === "spotify-this-song"){
   console.log("searching spotify");
@@ -42,7 +48,11 @@ else if (command === "spotify-this-song"){
    });
 }
 else if (command === "movie-this"){
-  
+  request('http://www.omdbapi.com/?apikey=40e9cece&', function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred 
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+    console.log('body:', body); // Print the HTML for the Google homepage. 
+  });
 }
 else if (command === "do-what-it-says"){
   //grab song data
